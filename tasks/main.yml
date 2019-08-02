@@ -13,19 +13,13 @@
     name: "{{ packages_name }}"
     state: present
 
-- name: Set the bind address to a specific IP
-  lineinfile:
-    path: /etc/elasticsearch/elasticsearch.yml
-    regexp: '^#network.host:'
-    line: "network.host: {{ elasticsearch_network_host }}"
-  changed_when: false
-
-- name: Set a custom port for HTTP
-  lineinfile:
-    path: /etc/elasticsearch/elasticsearch.yml
-    regexp: '^#http.port:'
-    line: "http.port: {{ elasticsearch_http_port }}"
-  changed_when: false
+- name: Configure Elasticsearch.
+  template:
+    src: elasticsearch.yml.j2
+    dest: /etc/elasticsearch/elasticsearch.yml
+    owner: root
+    group: elasticsearch
+    mode: 0660
 
 # - name: Force a restart if configuration has changed.
 #   meta: flush_handlers
