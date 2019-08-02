@@ -3,9 +3,10 @@ dependencies:
   - geerlingguy.java
 
 galaxy_info:
-  author: geerlingguy
+  role_name: elasticsearch
+  author: none
   description: Elasticsearch for Linux.
-  company: "Midwestern Mac, LLC"
+  company: "none"
   license: "license (BSD, MIT)"
   min_ansible_version: 2.4
   platforms:
