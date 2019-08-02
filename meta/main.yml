@@ -1,6 +1,6 @@
 ---
 dependencies:
-  - geerlingguy.java
+  - chauanhtuandl.java
 
 galaxy_info:
   role_name: elasticsearch
