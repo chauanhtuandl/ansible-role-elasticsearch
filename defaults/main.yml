@@ -1,5 +1,5 @@
 ---
-packages_name: elasticsearch
+packages_name: elasticsearch-oss
 service_name: elasticsearch
 service_service_state: started
 service_service_enabled: true
