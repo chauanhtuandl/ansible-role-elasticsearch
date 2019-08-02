@@ -15,14 +15,14 @@
     path: /etc/elasticsearch/elasticsearch.yml
     regexp: '^#network.host:'
     line: "network.host: {{ elasticsearch_network_host }}"
-    backup: yes
+    backup: true
 
 - name: Set a custom port for HTTP
   lineinfile:
     path: /etc/elasticsearch/elasticsearch.yml
     regexp: '^#http.port:'
     line: "http.port: {{ elasticsearch_http_port }}"
-    backup: yes
+    backup: true
 
 # - name: Force a restart if configuration has changed.
 #   meta: flush_handlers

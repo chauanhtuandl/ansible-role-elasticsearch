@@ -9,7 +9,7 @@
 - name: Import gpg key
   rpm_key:
     state: present
-    key: {{ item.gpgkey | default(omit) }}
+    key: "{{ item.gpgkey | default(omit) }}"
   when: item.gpgkey is defined
   with_items: "{{ yum_repository }}"
 

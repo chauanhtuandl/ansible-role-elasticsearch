@@ -7,6 +7,6 @@ yum_repository:
     repo_gpgcheck: false
     enabled: true
     gpgcheck: true
-    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch  
+    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     sslverify: false
     sslcacert:
