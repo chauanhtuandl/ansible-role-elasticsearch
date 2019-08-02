@@ -1,0 +1,5 @@
+---
+apt_packages_name:
+  - apt-transport-https
+apt_repository: 'https://artifacts.elastic.co/packages/6.x/apt stable main'
+apt_gpg_key: 'https://artifacts.elastic.co/GPG-KEY-elasticsearch'

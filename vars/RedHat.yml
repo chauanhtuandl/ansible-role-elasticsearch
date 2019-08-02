@@ -1,0 +1,12 @@
+---
+yum_packages_name: []
+
+yum_repository:
+  - name: elasticsearch-6.x
+    baseurl: https://artifacts.elastic.co/packages/6.x/yum
+    repo_gpgcheck: false
+    enabled: true
+    gpgcheck: true
+    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch  
+    sslverify: false
+    sslcacert:

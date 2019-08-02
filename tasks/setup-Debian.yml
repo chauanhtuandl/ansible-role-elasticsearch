@@ -1,16 +1,25 @@
 ---
-- name: HTTPS APT transport for Elasticsearch repository.
+- name: Ensure package idependent are installed.
   apt:
-    name: apt-transport-https
-    state: present
-
-- name: Add Elasticsearch apt key.
-  apt_key:
-    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-    state: present
-
-- name: Add Elasticsearch repository.
-  apt_repository:
-    repo: 'deb https://artifacts.elastic.co/packages/{{ elasticsearch_version }}/apt stable main'
-    state: present
+    name: "{{ apt_packages_name }}"
     update_cache: true
+    state: present
+  when: apt_packages_name is defined
+
+- name: Add an Apt signing key for {{ service_name }}
+  apt_key:
+    url: "{{ apt_gpg_key }}"
+    state: present
+  when: apt_gpg_key is defined
+
+- name: Add {{ service_name }} repository
+  apt_repository:
+    repo: deb {{ apt_repository }}
+    state: present
+  when: apt_repository is defined
+
+- name: Ensure {{ service_name }} are installed.
+  apt:
+    name: "{{ packages_name }}"
+    update_cache: true
+    state: present

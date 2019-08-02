@@ -7,26 +7,31 @@
 
 - name: Install Elasticsearch.
   package:
-    name: elasticsearch
-    state: "{{ elasticsearch_package_state }}"
+    name: "{{ packages_name }}"
+    state: present
 
-- name: Configure Elasticsearch.
-  template:
-    src: elasticsearch.yml.j2
-    dest: /etc/elasticsearch/elasticsearch.yml
-    owner: root
-    group: elasticsearch
-    mode: 0660
-  notify: restart elasticsearch
+- name: Set the bind address to a specific IP
+  lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    regexp: '^#network.host:'
+    line: "network.host: {{ elasticsearch_network_host }}"
+    backup: yes
 
-- name: Force a restart if configuration has changed.
-  meta: flush_handlers
+- name: Set a custom port for HTTP
+  lineinfile:
+    path: /etc/elasticsearch/elasticsearch.yml
+    regexp: '^#http.port:'
+    line: "http.port: {{ elasticsearch_http_port }}"
+    backup: yes
+
+# - name: Force a restart if configuration has changed.
+#   meta: flush_handlers
 
 - name: Start Elasticsearch.
   service:
-    name: elasticsearch
-    state: "{{ elasticsearch_service_state }}"
-    enabled: "{{ elasticsearch_service_enabled }}"
+    name: "{{ service_name }}"
+    state: "{{ service_service_state }}"
+    enabled: "{{ service_service_enabled }}"
 
 - name: Make sure Elasticsearch is running before proceeding.
   wait_for:
