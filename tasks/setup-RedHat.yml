@@ -38,4 +38,4 @@
   yum:
     name: "{{ packages_name }}"
     update_cache: true
-    state: present
+    state: "{{ package_state }}"

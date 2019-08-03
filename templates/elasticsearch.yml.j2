@@ -14,48 +14,55 @@
 #
 # Use a descriptive name for your cluster:
 #
-{% if elasticsearch_cluster_name is defined %}
-    cluster.name: {{ elasticsearch_cluster_name }}
+# cluster.name: my-application
+{% if elasticsearch_cluster_name is defined and elasticsearch_cluster_name %}
+cluster.name: {{ elasticsearch_cluster_name }}
 {% endif %}
 
-{% if elasticsearch_action_auto_create_index is defined %}
-action.auto_create_index: {{ elasticsearch_action_auto_create_index }}
+# action.auto_create_index: false
+{% if elasticsearch_action_auto_create_index | bool is not none %}
+action.auto_create_index: {{ elasticsearch_action_auto_create_index | bool | lower }}
 {% endif %}
 #
 # ------------------------------------ Node ------------------------------------
 #
 # Use a descriptive name for the node:
 #
-{% if elasticsearch_node_name is defined %}
-    node.name: {{ elasticsearch_node_name }}
+#node.name: node-1
+{% if elasticsearch_node_name is defined and elasticsearch_node_name %}
+node.name: {{ elasticsearch_node_name }}
 {% endif %}
 #
 # Add custom attributes to the node:
 #
-{% if elasticsearch_node_attr_rack is defined %}
-    node.attr.rack: {{ elasticsearch_node_attr_rack }}
+#node.attr.rack: r1
+{% if elasticsearch_node_attr_rack is defined and elasticsearch_node_attr_rack %}
+node.attr.rack: {{ elasticsearch_node_attr_rack }}
 {% endif %}
 #
 # ----------------------------------- Paths ------------------------------------
 #
 # Path to directory where to store the data (separate multiple locations by comma):
 #
-{% if elasticsearch_path_data is defined %}
-    path.data: {{ elasticsearch_path_data }}
+# path.data: /var/lib/elasticsearch
+{% if elasticsearch_path_data is defined and elasticsearch_path_data %}
+path.data: {{ elasticsearch_path_data }}
 {% endif %}
 #
 # Path to log files:
 #
-{% if elasticsearch_path_logs is defined %}
-    path.logs: {{ elasticsearch_path_logs }}
+# path.logs: /var/log/elasticsearch
+{% if elasticsearch_path_logs is defined and elasticsearch_path_logs %}
+path.logs: {{ elasticsearch_path_logs }}
 {% endif %}
 #
 # ----------------------------------- Memory -----------------------------------
 #
 # Lock the memory on startup:
 #
-{% if elasticsearch_bootstrap_memory_lock is defined %}
-    bootstrap.memory_lock: {{ elasticsearch_bootstrap_memory_lock }}
+# bootstrap.memory_lock: true
+{% if elasticsearch_bootstrap_memory_lock | bool is not none %}
+bootstrap.memory_lock: {{ elasticsearch_bootstrap_memory_lock | bool | lower }}
 {% endif %}
 #
 # Make sure that the heap size is set to about half the memory available
@@ -68,14 +75,16 @@ action.auto_create_index: {{ elasticsearch_action_auto_create_index }}
 #
 # Set the bind address to a specific IP (IPv4 or IPv6):
 #
-{% if elasticsearch_network_host is defined %}
-    network.host: {{ elasticsearch_network_host }}
+# network.host: localhost
+{% if elasticsearch_network_host is defined and elasticsearch_network_host %}
+network.host: {{ elasticsearch_network_host }}
 {% endif %}
 #
 # Set a custom port for HTTP:
 #
-{% if elasticsearch_http_port is defined %}
-    http.port: {{ elasticsearch_http_port }}
+# http.port: 9200
+{% if elasticsearch_http_port is defined and elasticsearch_http_port %}
+http.port: {{ elasticsearch_http_port }}
 {% endif %}
 #
 # For more information, consult the network module documentation.
@@ -85,14 +94,16 @@ action.auto_create_index: {{ elasticsearch_action_auto_create_index }}
 # Pass an initial list of hosts to perform discovery when new node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-{% if elasticsearch_discovery_zen_ping_unicast_hosts is defined %}
-    discovery.zen.ping.unicast.hosts: [{{ elasticsearch_discovery_zen_ping_unicast_hosts }}]
+#discovery.zen.ping.unicast.hosts: ["host1", "host2"]
+{% if elasticsearch_discovery_zen_ping_unicast_hosts is defined and elasticsearch_discovery_zen_ping_unicast_hosts %}
+discovery.zen.ping.unicast.hosts: [{{ elasticsearch_discovery_zen_ping_unicast_hosts }}]
 {% endif %}
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
 #
-{% if elasticsearch_discovery_zen_minimum_master_nodes is defined %}
-    discovery.zen.minimum_master_nodes: {{ elasticsearch_discovery_zen_minimum_master_nodes }}
+#discovery.zen.minimum_master_nodes: 
+{% if elasticsearch_discovery_zen_minimum_master_nodes is defined and elasticsearch_discovery_zen_minimum_master_nodes %}
+discovery.zen.minimum_master_nodes: {{ elasticsearch_discovery_zen_minimum_master_nodes }}
 {% endif %}
 #
 # For more information, consult the zen discovery module documentation.
@@ -101,8 +112,9 @@ action.auto_create_index: {{ elasticsearch_action_auto_create_index }}
 #
 # Block initial recovery after a full cluster restart until N nodes are started:
 #
-{% if elasticsearch_gateway_recover_after_nodes is defined %}
-    gateway.recover_after_nodes: {{ elasticsearch_gateway_recover_after_nodes }}
+#gateway.recover_after_nodes: 3
+{% if elasticsearch_gateway_recover_after_nodes is defined and elasticsearch_gateway_recover_after_nodes %}
+gateway.recover_after_nodes: {{ elasticsearch_gateway_recover_after_nodes }}
 {% endif %}
 #
 # For more information, consult the gateway module documentation.
@@ -111,6 +123,7 @@ action.auto_create_index: {{ elasticsearch_action_auto_create_index }}
 #
 # Require explicit names when deleting indices:
 #
-{% if elasticsearch_action_destructive_requires_name is defined %}
-    action.destructive_requires_name: {{ elasticsearch_action_destructive_requires_name }}
+#action.destructive_requires_name: true
+{% if elasticsearch_action_destructive_requires_name | bool is not none %}
+action.destructive_requires_name: {{ elasticsearch_action_destructive_requires_name | bool | lower }}
 {% endif %}

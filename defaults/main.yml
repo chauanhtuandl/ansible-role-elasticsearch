@@ -4,19 +4,25 @@ service_name: elasticsearch
 service_service_state: started
 service_service_enabled: true
 
-elasticsearch_version: 'oss-6.x'
-elasticsearch_package_state: present
+packages_version: 'oss-6.x'
+package_state: present
 
 elasticsearch_cluster_name: 'my-application'
 elasticsearch_action_auto_create_index: false
-elasticsearch_node_name:  # node-1
-elasticsearch_node_attr_rack:  # r1
+elasticsearch_node_name:
+# node-1
+elasticsearch_node_attr_rack:
+# r1
 elasticsearch_path_data: '/var/lib/elasticsearch'
 elasticsearch_path_logs: '/var/log/elasticsearch'
-elasticsearch_bootstrap_memory_lock:  # true
+elasticsearch_bootstrap_memory_lock:
+# true
 elasticsearch_network_host: localhost
 elasticsearch_http_port: 9200
-elasticsearch_discovery_zen_ping_unicast_hosts:  # '"host1", "host2"'
+elasticsearch_discovery_zen_ping_unicast_hosts:
+# '"host1", "host2"'
 elasticsearch_discovery_zen_minimum_master_nodes:
-elasticsearch_gateway_recover_after_nodes:  # 3
-elasticsearch_action_destructive_requires_name:  # true
+elasticsearch_gateway_recover_after_nodes:
+# 3
+elasticsearch_action_destructive_requires_name:
+# true
