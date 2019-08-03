@@ -8,7 +8,8 @@ packages_version: 'oss-6.x'
 package_state: present
 
 elasticsearch_cluster_name: 'my-application'
-elasticsearch_action_auto_create_index: false
+elasticsearch_action_auto_create_index:
+# false
 elasticsearch_node_name:
 # node-1
 elasticsearch_node_attr_rack:
