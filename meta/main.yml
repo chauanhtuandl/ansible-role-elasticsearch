@@ -1,6 +1,7 @@
 ---
 dependencies:
-  - chauanhtuandl.java
+  - src: chauanhtuandl.java
+    version: master
 
 galaxy_info:
   role_name: elasticsearch
